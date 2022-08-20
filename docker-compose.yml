@@ -1,0 +1,31 @@
+version: "3.7"
+services:
+  smartband-app:
+    container_name: smartband-app
+    build: .
+    links:
+      - smartband-mongo
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - "3003:3003"
+    environment:
+      - PORT=3003
+      - DB_SERVICE=smartband-mongo
+      - DB_PORT=385
+      - DB_NAME=smartbandDB
+  smartband-mongo:
+    image: mongo:latest # use the latest image.
+    container_name: smartband-mongo
+    restart: always
+    environment: # set required env variables to access mongo
+      MONGO_INITDB_DATABASE: smartbandDB
+    command: mongod --port 385
+    ports:
+      - 385:385
+    volumes: # optional to preserve database after container is deleted.
+      - ./data/db:/data/db
+# volumes:
+#   mongo-volume:
+  
