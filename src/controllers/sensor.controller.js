@@ -14,7 +14,7 @@ const recordSensor = async (req, res, next) => {
 
 const getSensors = async (req, res, next) => {
     try {
-        const sensors = await Sensor.find()
+        const sensors = await Sensor.find().sort({createdAt: -1})
         res.json(sensors)
     } catch (error) {
         res.status(400).json({message: error.toString()})
