@@ -21,7 +21,19 @@ const getSensors = async (req, res, next) => {
     }
 }
 
+const getLastSensor = async (req, res, next) => {
+    try {
+        const sensors = await Sensor.find().sort({createdAt: -1})
+        if(sensors.length <= 0) throw 'Sensors is empty!'
+        const sensor = sensors[0]
+        res.json(sensor)
+    } catch (error) {
+        res.status(400).json({message: error.toString()})
+    }
+}
+
 module.exports = {
     recordSensor,
+    getLastSensor,
     getSensors
 }
