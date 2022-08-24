@@ -32,8 +32,18 @@ const getLastSensor = async (req, res, next) => {
     }
 }
 
+const deleteSensors = async (req, res, next) => {
+    try {
+        await Sensor.deleteMany()
+        res.json({message: 'Successfully deleted Sensors!'})
+    } catch (error) {
+        res.status(400).json({message: error.toString()})
+    }
+}
+
 module.exports = {
     recordSensor,
     getLastSensor,
-    getSensors
+    getSensors,
+    deleteSensors
 }

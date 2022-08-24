@@ -1,6 +1,8 @@
 const router = require('express').Router();
-const sensroRouter = require('./sensor.route')
+const sensorRouter = require('./sensor.route')
+const heartRateRouter = require('./heart_rate.route')
 
-router.use('/sensor', sensroRouter);
+router.use('/sensor', sensorRouter);
+router.use('/heart-rate', heartRateRouter);
 
 module.exports = router;
