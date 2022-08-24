@@ -7,6 +7,12 @@ const heartRateSchema = new Schema({
         type: Number,
         required: true,
     },
+    createdAt: {
+        type: String
+    },
+    updatedAt: {
+        type: String
+    }
 });
 
 heartRateSchema.pre('save', function(next){
